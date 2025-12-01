@@ -1,0 +1,103 @@
+@model GesEmpAspNet.Models.AccountsViewModel
+
+@{
+    ViewData["Title"] = "Liste des comptes";
+}
+
+<div class="d-flex align-items-center mb-4 header-actions">
+    <h2 class="me-auto">Liste des comptes</h2>
+    <a class="btn btn-create" asp-controller="Home" asp-action="Employees">+ Nouveau compte</a>
+</div>
+
+<form class="row g-2 mb-3" method="get" asp-action="Employees" asp-controller="Home">
+    <div class="col-md-6 d-flex">
+        <input class="form-control me-2" type="search" name="search" placeholder="Rechercher un compte..." value="@Model.Search" />
+        <button class="btn btn-outline-secondary" type="submit">🔍</button>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" name="typeFilter">
+            <option value="">Type de compte</option>
+            @if (Model.TypeFilter == "Épargne") {
+                <option value="Épargne" selected>Épargne</option>
+            } else {
+                <option value="Épargne">Épargne</option>
+            }
+            @if (Model.TypeFilter == "Chèque") {
+                <option value="Chèque" selected>Chèque</option>
+            } else {
+                <option value="Chèque">Chèque</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" name="sortBy">
+            <option value="">Trier par</option>
+            @if (Model.SortBy == "date") {
+                <option value="date" selected>Date de création</option>
+            } else {
+                <option value="date">Date de création</option>
+            }
+            @if (Model.SortBy == "balance") {
+                <option value="balance" selected>Solde</option>
+            } else {
+                <option value="balance">Solde</option>
+            }
+        </select>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>N° Compte</th>
+                <th>Titulaire</th>
+                <th>Type</th>
+                <th>Solde</th>
+                <th>Date de création</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var a in Model.Accounts)
+            {
+                <tr>
+                    <td>@a.AccountNumber</td>
+                    <td>@a.Holder</td>
+                    <td>
+                        @if (a.Type == "Épargne") {
+                            <span class="badge badge-type-epargne">@a.Type</span>
+                        } else {
+                            <span class="badge badge-type-cheque">@a.Type</span>
+                        }
+                    </td>
+                    <td>@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", a.Balance) @("FCFA")</td>
+                    <td>@a.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if(a.Status.Contains("Bloqué")) {
+                            <span class="badge bg-warning text-dark">@a.Status</span>
+                        } else {
+                            <span class="badge bg-success">@a.Status</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-view text-white me-1" href="#" title="Voir">👁</a>
+                        <a class="btn btn-sm btn-edit text-white me-1" href="#" title="Modifier">✏️</a>
+                        <a class="btn btn-sm btn-delete text-white" href="#" title="Supprimer">🗑️</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled"><a class="page-link" href="#">Précédent</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+    </ul>
+</nav>

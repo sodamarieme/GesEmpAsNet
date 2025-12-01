@@ -1,0 +1,59 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* Employees / Accounts page custom styles to match the provided design */
+.header-actions { display:flex; align-items:center; gap:12px; }
+.header-actions .btn-create { background: #0d6efd; border-color: #0d6efd; color: #fff; padding: 0.5rem 0.9rem; }
+.header-actions .btn-create:hover { background:#0b5ed7; border-color:#0b5ed7; }
+
+.badge-type-epargne { background: #00c0ff; color: #fff; }
+.badge-type-cheque { background: #6c757d; color: #fff; }
+
+.table.align-middle th { font-weight: 600; border-bottom: 2px solid #e9ecef; }
+.table td, .table th { vertical-align: middle; }
+
+.btn-view { background: #0d6efd; border-color: #0d6efd; color: #fff; }
+.btn-view:hover { background:#0b5ed7; border-color:#0b5ed7; }
+.btn-edit { background: #ffc107; border-color: #ffc107; color: #212529; }
+.btn-edit:hover { background:#e0a800; border-color:#e0a800; }
+.btn-delete { background: #dc3545; border-color: #dc3545; color: #fff; }
+.btn-delete:hover { background:#c82333; border-color:#c82333; }
+.table .btn { padding: 0.35rem 0.55rem; font-size: 0.9rem; }
+
+.pagination { margin-top: 1.5rem; }
+.pagination .page-item .page-link { color: #0d6efd; }
+.pagination .page-item.active .page-link { background: #0d6efd; border-color: #0d6efd; color: #fff; }
+
+/* small responsive tweaks */
+@media (max-width: 576px) {
+  .header-actions { flex-direction:column; align-items:stretch; }
+}
